@@ -42,3 +42,24 @@ models:
       - name: company_id
         tests:
           - not_null
+
+  - name: dim_skill
+    description: "Unique skills with demand stats"
+    columns:
+      - name: skill_id
+        tests:
+          - unique
+          - not_null
+      - name: skill_name
+        tests:
+          - not_null
+
+  - name: fact_job_skills
+    description: "Bridge table connecting jobs to skills"
+    columns:
+      - name: job_id
+        tests:
+          - not_null
+      - name: skill_name
+        tests:
+          - not_null
