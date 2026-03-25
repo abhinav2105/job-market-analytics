@@ -1,4 +1,7 @@
-from prefect import flow
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from prefect.client.schemas.schedules import CronSchedule
 from orchestration.pipeline import job_market_pipeline
 
