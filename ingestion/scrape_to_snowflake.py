@@ -200,8 +200,21 @@ def load_to_bronze(items, conn):
     conn.commit()
     print(f"✅ Inserted {inserted} rows into Bronze layer")
 
+def truncate_bronze(conn):
+    cursor = conn.cursor()
+    cursor.execute("TRUNCATE TABLE JOB_MARKET.BRONZE.RAW_LINKEDIN_JOBS")
+    conn.commit()
+    print("🗑️ Bronze table truncated")
+
 # ── Main ─────────────────────────────────────────────────
 def main():
+    conn = get_snowflake_conn()
+    print("✅ Snowflake connected\n")
+    
+    # truncate bronze before each run
+    truncate_bronze(conn)
+    
+    # rest of the code...
     roles = [
         "data analyst",
         "data engineer",
